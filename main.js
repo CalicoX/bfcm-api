@@ -287,6 +287,86 @@
   var stats = document.querySelector(".stats-band .stats");
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  var statRollCss = [
+    ".stat-roll{position:absolute;top:0;left:50%;transform:translateX(-50%);display:inline-flex;flex-flow:row nowrap;align-items:flex-end;height:1.15em;white-space:nowrap;pointer-events:none;user-select:none}",
+    ".stat-digit{position:relative;display:block;flex:0 0 auto;align-self:flex-end;width:1ch;height:1.15em;overflow:clip;line-height:1.15}",
+    ".stat-digit-strip{position:absolute;top:0;left:0;display:flex;flex-direction:column;width:100%;margin:0;transform:translateY(0);transition:transform 1400ms cubic-bezier(0.16,0.55,0.24,1);transition-delay:calc(var(--stat-i,0)*90ms + var(--digit-i,0)*45ms)}",
+    ".stat-digit-strip>span{display:block;height:1.15em;line-height:1.15;flex:0 0 1.15em}",
+    ".stat-mark,.stat-suffix{position:static;display:block;flex:0 0 auto;align-self:flex-end;height:1.15em;line-height:1.15;white-space:pre}",
+    ":host-context(.stats.is-in) .stat-digit-strip{transform:translateY(calc(var(--roll) / (var(--roll) + 1) * -100%))}",
+    "@media (prefers-reduced-motion:reduce){.stat-digit-strip{transition:none;transform:translateY(calc(var(--roll) / (var(--roll) + 1) * -100%))}}"
+  ].join("");
+
+  function mountStatRolls(list) {
+    var values = list.querySelectorAll(".stat-value");
+    Array.prototype.forEach.call(values, function (el) {
+      var raw = (el.textContent || "").replace(/\s+/g, " ").trim();
+      var match = raw.match(/^(\d[\d,]*(?:\.\d+)?)(.*)$/);
+      if (!match || el.shadowRoot) return;
+      var figure = match[1];
+      var suffix = match[2];
+      var item = el.closest("li");
+      var statIndex = item ? Array.prototype.indexOf.call(list.children, item) : 0;
+      var roll = document.createElement("span");
+      var digitIndex = 0;
+      roll.className = "stat-roll";
+      roll.setAttribute("aria-hidden", "true");
+
+      for (var i = 0; i < figure.length; i++) {
+        var ch = figure.charAt(i);
+        if (ch < "0" || ch > "9") {
+          var mark = document.createElement("span");
+          mark.className = "stat-mark";
+          mark.setAttribute("aria-hidden", "true");
+          mark.textContent = ch;
+          roll.appendChild(mark);
+          continue;
+        }
+        var steps = 10 + (ch.charCodeAt(0) - 48);
+        var cell = document.createElement("span");
+        var strip = document.createElement("span");
+        cell.className = "stat-digit";
+        cell.setAttribute("aria-hidden", "true");
+        strip.className = "stat-digit-strip";
+        strip.setAttribute("aria-hidden", "true");
+        strip.style.setProperty("--roll", String(steps));
+        strip.style.setProperty("--digit-i", String(digitIndex));
+        strip.style.setProperty("--stat-i", String(statIndex));
+        digitIndex += 1;
+        for (var step = 0; step <= steps; step++) {
+          var glyph = document.createElement("span");
+          glyph.textContent = String(step % 10);
+          glyph.setAttribute("aria-hidden", "true");
+          strip.appendChild(glyph);
+        }
+        cell.appendChild(strip);
+        roll.appendChild(cell);
+      }
+
+      if (suffix) {
+        var tail = document.createElement("span");
+        tail.className = "stat-suffix";
+        tail.setAttribute("aria-hidden", "true");
+        tail.textContent = suffix;
+        roll.appendChild(tail);
+      }
+
+      var finalText = document.createElement("span");
+      finalText.className = "stat-final";
+      finalText.textContent = raw;
+      el.textContent = "";
+      el.appendChild(finalText);
+      var shadow = el.attachShadow({ mode: "open" });
+      var style = document.createElement("style");
+      var slot = document.createElement("slot");
+      style.textContent = statRollCss;
+      shadow.append(style, roll, slot);
+      el.classList.add("has-roll");
+    });
+  }
+
+  if (stats && !reduceMotion) mountStatRolls(stats);
+
   if (stats && "IntersectionObserver" in window && !reduceMotion) {
     var statsSeen = false;
     var statsObserver = new IntersectionObserver(function (entries) {

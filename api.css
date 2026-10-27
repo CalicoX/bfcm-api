@@ -28,6 +28,13 @@
   text-align: center;
 }
 
+.stats-band .stat-value {
+  display: inline-flex;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+}
+
 .stats-band .stat-label { font-size: 14px; }
 
 .hero-gifts {
@@ -131,7 +138,7 @@
   letter-spacing: 0;
 }
 
-.price-card.is-popular .api-bonus { color: var(--accent-text); }
+.price-card.is-popular .api-bonus { color: var(--brand-accent); }
 
 .api-bonus.is-words {
   max-width: 8em;
