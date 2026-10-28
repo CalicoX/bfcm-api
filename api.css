@@ -646,6 +646,15 @@
   border-top: 1px solid var(--border-default);
 }
 
+/* Priced cards have a 20px "Lowest unit price" line above the figure.
+   The enterprise teaser replaces the figure only, so reserve that line
+   or its rule sits 20px lower once .api-foot is bottom-aligned. */
+.api-unit:not(:has(.price-unit-label))::before {
+  content: "";
+  display: block;
+  height: 20px;
+}
+
 .api-unit-price {
   display: flex;
   flex-wrap: wrap;
@@ -677,7 +686,12 @@
 
 .api-tiers .price-card-head { padding-top: 36px; }
 
-.api-tiers .price-card.is-popular { padding-top: 72px; }
+.api-tiers .price-card.is-popular {
+  padding-top: 72px;
+  /* 2px border vs 1px (border-box) insets this card 1px. 23px puts the
+     foot rule on the same y as the 24px-padded cards. */
+  padding-bottom: 23px;
+}
 
 .api-tiers .price-card.is-popular .price-card-head { padding-top: 8px; }
 
