@@ -7,7 +7,7 @@
   <meta name="description" content="17TRACK API Black Friday 2026. Bonus quota up to 10% on parcel tracking plans, through November 30.">
   <link rel="stylesheet" href="assets/fonts/fonts.css">
   <link rel="stylesheet" href="styles.css?v=30">
-  <link rel="stylesheet" href="api.css?v=19">
+  <link rel="stylesheet" href="api.css?v=30">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23003a9b'/%3E%3C/svg%3E">
 </head>
 <body class="api-page">
@@ -131,11 +131,105 @@
         </div>
 
         <figure class="hero-visual">
-          <div class="hero-gifts">
-            <img class="gift-bag" src="assets/gift-bag.png?v=4" alt="" width="656" height="876">
-            <img class="gift-box" src="assets/gift-box.png?v=4" alt="" width="824" height="796">
-            <img class="gift-parcel" src="assets/gift-parcel.png?v=4" alt="" width="737" height="710">
+          <div class="api-shot">
+            <div class="api-register">
+              <div class="api-code">
+                <div class="api-code-bar">
+                  <span class="api-traffic" aria-hidden="true"><i></i><i></i><i></i></span>
+                  <span class="api-code-name">&lt;/17track.api&gt;</span>
+                </div>
+                <div class="api-code-body">
+                  <p><span class="tok-cmd">curl -X POST \</span></p>
+                  <p><span class="tok-key">--header</span> '17token:token' \</p>
+                  <p><span class="tok-key">--header</span> 'Content-Type:application/json' \</p>
+                  <p><span class="tok-data">--data</span> '[</p>
+                  <p class="lv1">{</p>
+                  <p class="lv2">"number": "RR123456789CN"</p>
+                  <p class="lv1">}</p>
+                  <p>]' \</p>
+                  <p><span class="tok-url">https://api.17track.net/track/v2/register</span></p>
+                </div>
+              </div>
+              <div class="api-flow" aria-hidden="true">
+                <svg width="14" height="28" viewBox="0 0 14 28" fill="none">
+                  <circle cx="7" cy="3.5" r="3" fill="#ff8c00"/>
+                  <path d="M7 6.5v12" stroke="#ff8c00" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M2.8 15.2 7 21.2l4.2-6" stroke="#ff8c00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="api-add">
+                <div class="api-add-head">
+                  <p>Add Number</p>
+                  <svg class="api-x" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2.2 2.2 9.8 9.8M9.8 2.2 2.2 9.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <p class="api-label">Tracking number*</p>
+                <p class="api-field">RR123456789CN</p>
+                <p class="api-label">Carrier*</p>
+                <p class="api-field">Auto-detect</p>
+              </div>
+            </div>
+
+            <div class="api-updates">
+              <div class="api-delivered">
+                <div class="api-tools">
+                  <span class="api-redact" aria-hidden="true"><span>RR123456789CN</span></span>
+                  <span class="api-view">View JSON <span class="api-switch" aria-hidden="true"></span></span>
+                  <svg class="api-x" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M2.2 2.2 9.8 9.8M9.8 2.2 2.2 9.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="api-status">
+                  <span class="api-check" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                      <path d="M3 7.2 5.7 9.9 11 4.4" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <div>
+                    <p class="api-status-title">Delivered</p>
+                    <p class="api-route">China(WUYOUEXP) <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7h9M8.2 3.6 11.6 7 8.2 10.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> United States</p>
+                    <p class="api-eta">Time of delivery: 2022/8/18</p>
+                  </div>
+                </div>
+                <div class="api-block">
+                  <p class="api-h">Time Info</p>
+                  <ul class="api-metrics">
+                    <li><span>Days after the first event</span><span class="api-leader" aria-hidden="true"></span><b>12 Day(s)</b></li>
+                    <li><span>Days after in transit</span><span class="api-leader" aria-hidden="true"></span><b>12 Day(s)</b></li>
+                    <li><span>Days after update stopped</span><span class="api-leader" aria-hidden="true"></span><b>0 Day(s)</b></li>
+                  </ul>
+                </div>
+                <div class="api-block">
+                  <p class="api-h">Shipping Events</p>
+                  <p class="api-carrier">WUYOUEXP · China</p>
+                  <ol class="api-events">
+                    <li class="is-now">
+                      <span class="api-node" aria-hidden="true"></span>
+                      <div>
+                        <p class="api-when">2022/8/18 10:22:00</p>
+                        <p class="api-where">SHINGLE SPRINGS CA 95682, Delivered</p>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="api-node" aria-hidden="true"></span>
+                      <div>
+                        <p class="api-when">2022/8/18 08:14:00</p>
+                        <p class="api-where">Out for Delivery, USPS</p>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="api-node" aria-hidden="true"></span>
+                      <div>
+                        <p class="api-when">2022/8/17 21:06:00</p>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
           </div>
+          <figcaption class="sr-only">Register tracking number RR123456789CN with the 17TRACK API, then receive a Delivered update from China to the United States.</figcaption>
         </figure>
       </div>
     </section>
@@ -201,8 +295,14 @@
           <h2 id="plans-title">Black Friday bonus quota</h2>
           <p class="lead">Buy during the campaign and get bonus quota on top. Higher tiers, bigger bonus.</p>
         </header>
+        <div class="api-tier-tabs" role="tablist" aria-label="Quota tiers" aria-orientation="horizontal">
+          <button type="button" class="api-tier-tab" role="tab" id="tab-tier-longtail" aria-controls="tier-longtail" aria-selected="false" tabindex="-1">&lt; 25K</button>
+          <button type="button" class="api-tier-tab" role="tab" id="tab-tier-smb" aria-controls="tier-smb" aria-selected="false" tabindex="-1">25K–500K</button>
+          <button type="button" class="api-tier-tab" role="tab" id="tab-tier-popular" aria-controls="tier-popular" aria-selected="true" tabindex="0">500K–5M<span class="api-tier-dot" aria-hidden="true"></span></button>
+          <button type="button" class="api-tier-tab" role="tab" id="tab-tier-enterprise" aria-controls="tier-enterprise" aria-selected="false" tabindex="-1">&gt; 5M</button>
+        </div>
         <div class="price-cards api-tiers">
-          <article class="price-card">
+          <article class="price-card" id="tier-longtail">
             <p class="price-bf">Black Friday</p>
             <header class="price-card-head">
               <h3>&lt; 25K</h3>
@@ -218,7 +318,7 @@
               <a class="price-cta" href="https://www.17track.net/en/api">Buy</a>
             </div>
           </article>
-          <article class="price-card">
+          <article class="price-card" id="tier-smb">
             <p class="price-bf">Black Friday</p>
             <header class="price-card-head">
               <h3>25K – 500K</h3>
@@ -234,7 +334,7 @@
               <a class="price-cta" href="https://www.17track.net/en/api">Buy</a>
             </div>
           </article>
-          <article class="price-card is-popular" id="tier-popular">
+          <article class="price-card is-popular is-active" id="tier-popular">
             <p class="price-ribbon">Most popular</p>
             <p class="price-bf">Black Friday</p>
             <header class="price-card-head">
@@ -251,7 +351,7 @@
               <a class="price-cta is-filled" href="https://www.17track.net/en/api">Buy</a>
             </div>
           </article>
-          <article class="price-card">
+          <article class="price-card" id="tier-enterprise">
             <p class="price-bf">Black Friday</p>
             <header class="price-card-head">
               <h3>&gt; 5M</h3>
@@ -427,6 +527,6 @@
     <button class="btn btn-primary" type="button" data-join-close>Close</button>
   </dialog>
 
-  <script src="main.js?v=23"></script>
+  <script src="main.js?v=26"></script>
 </body>
 </html>

@@ -782,4 +782,91 @@
       }
     });
   }
+
+  function mountApiTierTabs() {
+    var tabs = document.querySelector(".api-tier-tabs");
+    var grid = document.querySelector(".price-cards.api-tiers");
+    if (!tabs || !grid) return;
+
+    var buttons = Array.prototype.slice.call(tabs.querySelectorAll("[role='tab']"));
+    var cards = buttons.map(function (btn) {
+      return document.getElementById(btn.getAttribute("aria-controls"));
+    });
+    if (!buttons.length || cards.some(function (card) { return !card; })) return;
+
+    var mobileQuery = window.matchMedia("(max-width: 800px)");
+    var selected = 0;
+    buttons.forEach(function (btn, i) {
+      if (btn.getAttribute("aria-selected") === "true") selected = i;
+    });
+
+    function reveal(btn) {
+      var pad = 4;
+      var left = btn.offsetLeft;
+      var right = left + btn.offsetWidth;
+      if (left - pad < tabs.scrollLeft) tabs.scrollLeft = Math.max(0, left - pad);
+      else if (right + pad > tabs.scrollLeft + tabs.clientWidth) {
+        tabs.scrollLeft = right + pad - tabs.clientWidth;
+      }
+    }
+
+    function apply(focusIndex) {
+      var mobile = mobileQuery.matches;
+      cards.forEach(function (card, i) {
+        var on = i === selected;
+        card.classList.toggle("is-active", on);
+        if (mobile) {
+          card.hidden = !on;
+          card.setAttribute("role", "tabpanel");
+          card.setAttribute("aria-labelledby", buttons[i].id);
+        } else {
+          card.hidden = false;
+          card.removeAttribute("role");
+          card.removeAttribute("aria-labelledby");
+        }
+      });
+      buttons.forEach(function (btn, i) {
+        var on = i === selected;
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+        btn.tabIndex = on ? 0 : -1;
+      });
+      if (mobile) reveal(buttons[selected]);
+      if (typeof focusIndex === "number") buttons[focusIndex].focus();
+    }
+
+    function select(index, focus) {
+      if (index < 0 || index >= buttons.length) return;
+      selected = index;
+      apply(focus ? index : undefined);
+    }
+
+    buttons.forEach(function (btn, i) {
+      btn.addEventListener("click", function () {
+        select(i, false);
+      });
+    });
+
+    tabs.addEventListener("keydown", function (event) {
+      var current = buttons.indexOf(event.target);
+      if (current < 0) return;
+      var next = current;
+      if (event.key === "ArrowRight") next = (current + 1) % buttons.length;
+      else if (event.key === "ArrowLeft") next = (current - 1 + buttons.length) % buttons.length;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = buttons.length - 1;
+      else return;
+      event.preventDefault();
+      select(next, true);
+    });
+
+    if (typeof mobileQuery.addEventListener === "function") {
+      mobileQuery.addEventListener("change", function () { apply(); });
+    } else if (typeof mobileQuery.addListener === "function") {
+      mobileQuery.addListener(function () { apply(); });
+    }
+    window.addEventListener("resize", function () { apply(); });
+    apply();
+  }
+
+  mountApiTierTabs();
 })();
