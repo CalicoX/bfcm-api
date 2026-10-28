@@ -773,8 +773,7 @@
   vertical-align: 0.4em;
 }
 
-#capabilities,
-#faq { scroll-margin-top: var(--chrome); }
+#capabilities { scroll-margin-top: var(--chrome); }
 
 @media (max-width: 1080px) {
   .hero-stats { padding-bottom: 56px; }
