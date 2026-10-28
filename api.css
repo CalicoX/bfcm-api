@@ -46,7 +46,7 @@
   --shot-front: clamp(248px, 42%, 332px);
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--shot-front);
-  align-items: start;
+  align-items: center;
   min-height: 400px;
   color: var(--text-primary);
   text-align: left;
@@ -66,7 +66,6 @@
   grid-row: 1;
   position: relative;
   min-width: 0;
-  margin-top: 22px;
   margin-left: -56px;
   z-index: 2;
 }
@@ -153,6 +152,10 @@
 .api-add {
   transform: scale(0.81);
   transform-origin: top center;
+  /* Scale keeps the layout box full height and leaves an empty tail
+     under the form. Pull that tail back so the register box ends on
+     the visible card and can share a center with Delivered. */
+  margin-bottom: calc(180px * (0.81 - 1));
 }
 
 /* No transform here. translateX would isolate backdrop-filter, so the
@@ -478,6 +481,7 @@
   .api-shot {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 14px;
     min-height: 0;
   }
@@ -489,7 +493,7 @@
   }
 
   .api-code-body { padding-right: 12px; }
-  .api-add { padding-right: 14px; }
+  .api-add { padding-right: 14px; margin-bottom: 0; }
 }
 
 .feat-grid {
